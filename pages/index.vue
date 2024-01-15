@@ -55,24 +55,47 @@ function ShowNA() {
   return na.value != 0
 }
 
+
+function DisplayText() {
+  const l1: string = ((product.value == 1) ? '◉' : '○') + OptionPos()
+  const l5: string = '<br>' + ((product.value == 5) ? '◉' : '○') + OptionNeg()
+  const l2: string = (ShowSW() ? (('<br>' + ((product.value == 2) ? '◉' : '○')) + OptionSWPos()) : '')
+  const l4: string = (ShowSW() ? (('<br>' + ((product.value == 4) ? '◉' : '○')) + OptionSWNeg()) : '')
+  const l3: string = (ShowN() ? (('<br>' + ((product.value == 3) ? '◉' : '○')) + OptionN()) : '')
+  const l6: string = (ShowNA() ? (('<br>' + ((product.value == 6) ? '◉' : '○')) + '無回答') : '')
+  return l1 + l2 + l3 + l4 + l5 + l6
+}
+
+function DisplayText2() {
+  // こちらは改行が \n なのでクリップボード用
+  const l1: string = ((product.value == 1) ? '◉' : '○') + OptionPos()
+  const l5: string = '\n' + ((product.value == 5) ? '◉' : '○') + OptionNeg()
+  const l2: string = (ShowSW() ? (('\n' + ((product.value == 2) ? '◉' : '○')) + OptionSWPos()) : '')
+  const l4: string = (ShowSW() ? (('\n' + ((product.value == 4) ? '◉' : '○')) + OptionSWNeg()) : '')
+  const l3: string = (ShowN() ? (('\n' + ((product.value == 3) ? '◉' : '○')) + OptionN()) : '')
+  const l6: string = (ShowNA() ? (('\n' + ((product.value == 6) ? '◉' : '○')) + '無回答') : '')
+  return l1 + l2 + l3 + l4 + l5 + l6
+}
+
+function CopyText() {
+  navigator.clipboard.writeText(DisplayText2())
+    .then(() => {
+      console.log("copied!")
+    })
+    .catch(e => {
+      console.error(e)
+    })
+}
+
+
+
+
+
+
+
 </script>
 
 <template>
-  <div>
-    <label> <input type="radio" style="accent-color: black" />ある</label>
-  </div>
-  <div>
-    <label> <input type="radio" style="accent-color: black" />どちらかというとある</label>
-  </div>
-  <div>
-    <label> <input type="radio" style="accent-color: black" />どちらとも言えない</label>
-  </div>
-  <div>
-    <label> <input type="radio" style="accent-color: black" />どちらかというとない</label>
-  </div>
-  <div>
-    <label> <input type="radio" style="accent-color: black" />ない</label>
-  </div>
   <div style="height: 100px;"></div>
 
 
@@ -126,7 +149,7 @@ function ShowNA() {
   <div style="width: 50px;"></div>
 
   <div class="d-f">
-    <div class=" d-fc">
+    <div class="d-fc display-text">
       <label> <input type="radio" name="product" value="1" v-model="product" checked />{{ OptionPos() }}</label>
       <label v-show="ShowSW()"> <input type="radio" name="product" value="2" v-model="product" />{{ OptionSWPos()
       }}</label>
@@ -137,6 +160,9 @@ function ShowNA() {
       <label v-show="ShowNA()"> <input type="radio" name="product" value="6" v-model="product" />無回答</label>
     </div>
   </div>
+
+  <p v-html="DisplayText()"></p>
+  <button type="button" @click="CopyText()">Copy</button>
 </template>
 
 <style>
@@ -181,6 +207,13 @@ label {
   margin: 5px 0;
   /* 前後のスペース */
 
+  cursor: pointer;
+  user-select: none;
+}
+
+.display-text label {
+  display: block;
+  margin: 0;
   cursor: pointer;
   user-select: none;
 }
