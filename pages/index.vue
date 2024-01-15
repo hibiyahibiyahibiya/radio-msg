@@ -96,16 +96,12 @@ function CopyText() {
 </script>
 
 <template>
-  <div style="height: 100px;"></div>
-
-
-
-
+  <hr>
   <div class="d-f">
-    <div class="half i-4">
-      表現は
+    <div class="left i-4">
+      回答の方向性
     </div>
-    <div class=" d-fc half">
+    <div class=" d-fc right">
       <label> <input type="radio" name="yesno" value="1" v-model="yesno" checked />はい,いいえ</label>
       <label> <input type="radio" name="yesno" value="2" v-model="yesno" />ある,ない</label>
       <label> <input type="radio" name="yesno" value="3" v-model="yesno" />そう思う,思わない</label>
@@ -113,43 +109,48 @@ function CopyText() {
   </div>
 
 
+  <hr>
   <div class="d-f">
-    <div class="half i-4">
-      程度の弱いのを
+    <div class="left i-4">
+      弱い選択肢
     </div>
-    <div class=" d-fc half">
+    <div class="d-fc right">
       <label> <input type="radio" name="somewhat" value="1" v-model="somewhat" />たぶん</label>
       <label> <input type="radio" name="somewhat" value="2" v-model="somewhat" />どちらかというと</label>
       <label> <input type="radio" name="somewhat" value="0" v-model="somewhat" checked />入れない</label>
     </div>
   </div>
 
+  <hr>
   <div class="d-f">
-    <div class="half i-4">
-      また、を
+    <div class="left i-4">
+      中立的選択肢
     </div>
-    <div class=" d-fc half">
+    <div class="d-fc right">
       <label> <input type="radio" name="neutral" value="1" v-model="neutral" />わからない</label>
       <label> <input type="radio" name="neutral" value="2" v-model="neutral" />どちらともいえない</label>
       <label> <input type="radio" name="neutral" value="0" v-model="neutral" checked />入れない</label>
     </div>
   </div>
 
+  <hr>
   <div class="d-f">
-    <div class="half i-4">
-      無回答を
+    <div class="left i-4">
+      無回答
     </div>
-    <div class=" d-fc half">
+    <div class="d-fc right">
       <label> <input type="radio" name="na" value="1" v-model="na" />入れる</label>
       <label> <input type="radio" name="na" value="0" v-model="na" checked />入れない</label>
     </div>
   </div>
 
+  <hr>
+  <div class="space"></div>
 
-  <div style="width: 50px;"></div>
+  <button type="button" @click="CopyText()" class="display-button">コピー</button>
 
   <div class="d-f">
-    <div class="d-fc display-text">
+    <div class="d-fc display-text display-box">
       <label> <input type="radio" name="product" value="1" v-model="product" checked />{{ OptionPos() }}</label>
       <label v-show="ShowSW()"> <input type="radio" name="product" value="2" v-model="product" />{{ OptionSWPos()
       }}</label>
@@ -160,9 +161,18 @@ function CopyText() {
       <label v-show="ShowNA()"> <input type="radio" name="product" value="6" v-model="product" />無回答</label>
     </div>
   </div>
+  <div class="space"></div>
 
-  <p v-html="DisplayText()"></p>
-  <button type="button" @click="CopyText()">Copy</button>
+  テキストver.
+  <p v-html="DisplayText()" class="display-box"></p>
+  <div class="space"></div>
+  <h1> アンケートの回答<br>ジェネレーター
+  </h1>
+  <div class="space"></div>
+  <p>
+    GitHubのリンクを設置する.<br>
+    言及する:radioボタン、リッカート尺度<br>
+    あとジェネレーターをcenterに、そしてPCのレスポンシブ対応</p>
 </template>
 
 <style>
@@ -184,9 +194,14 @@ div.d-b {
   display: block;
 }
 
-.half {
-  width: 50%;
+.left {
+  width: 40%;
 }
+
+.right {
+  width: 60%;
+}
+
 
 .i-4 {
   text-align: center;
@@ -199,6 +214,12 @@ div.d-b {
 
 .dev-l {
   background-color: lime;
+}
+
+hr {
+  border: none;
+  border-bottom: 1px solid #333;
+  margin: 0;
 }
 
 label {
@@ -216,5 +237,22 @@ label {
   margin: 0;
   cursor: pointer;
   user-select: none;
+}
+
+.display-button {
+  display: block;
+  margin-left: auto;
+  cursor: pointer;
+  user-select: none;
+  width: 30%;
+}
+
+.display-box {
+  width: 100%;
+  border: 1px solid #333;
+}
+
+div.space {
+  height: 20px;
 }
 </style>
