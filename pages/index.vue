@@ -89,6 +89,9 @@ function CopyText() {
 
 
 
+useHead({
+  title: 'アンケートの回答ジェネレーター',
+});
 
 
 
