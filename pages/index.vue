@@ -163,19 +163,25 @@ function CopyText() {
   </div>
   <div class="space"></div>
 
-  テキストver.
+  テキストプレビュー
   <p v-html="DisplayText()" class="display-box"></p>
   <div class="space"></div>
-  <h1> アンケートの回答<br>ジェネレーター
-  </h1>
-  <div class="space"></div>
-  <p>
-    GitHubのリンクを設置する.<br>
-    言及する:radioボタン、リッカート尺度<br>
-    あとジェネレーターをcenterに、そしてPCのレスポンシブ対応</p>
+  <div id="description">
+    <h1> アンケートの回答<br>ジェネレーター
+    </h1>
+    <div class="space"></div>
+    <a href="https://github.com/hibiyahibiyahibiya/radio-msg" style="margin-right: 30px">
+      <img src="https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png" width="40" />
+    </a>
+
+  </div>
 </template>
 
 <style>
+#description {
+  text-align: center;
+}
+
 input {
   accent-color: black;
 }
